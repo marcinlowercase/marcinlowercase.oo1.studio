@@ -11,6 +11,17 @@
     </head>
     <body>
         <main id="canvas">
+            <!-- pinned top text display -->
+            <header id="top-display" class="top-display">
+                <p id="display-text" class="display-text">
+                    i am a developer focused on things you can see, touch, and feel.
+                    graduated in computer systems technology from saskatchewan polytechnic, i build purely from imagination and originality under the names theo and marc.
+                    i love c for its purity and css for its craft, with no interest in backend logic, corporate buzzwords, or LeetCode problems.
+                    i am not a designer or a founder; i simply make software in the exact way i want it to look.
+                    through oo1 studio, i match digital interfaces to physical hardware—like shaping a browser view to the exact corner radius of a phone—making tools look beautiful, even if nobody cares.
+                </p>
+            </header>
+
             <!-- svg dynamic connector arrows layer -->
             <svg id="arrows-layer" class="arrows-layer">
                 <defs>
@@ -29,17 +40,6 @@
                 <img src="./assets/images/tom.svg" alt="solid tom logo" class="canvas-logo logo-solid" draggable="false" />
             </div>
 
-            <!-- draggable bio card -->
-            <div id="item-bio" class="canvas-item item-bio" draggable="false">
-                <p>
-                    i am theo, an engineer and interface designer matching software to physical hardware.
-                    on GitHub and across the web, i build under the alias marcinlowercase.
-                    tom is my drawn mascot and visual alter-ego across my tools and experiments.
-                    my work centers on creating minimal computing systems, custom inputs, and tactile software at oo1 studio.
-                    drag anything around this canvas to explore.
-                </p>
-            </div>
-
             <!-- draggable project: browser icon only -->
             <a id="item-project-a" href="https://browser.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="browser" draggable="false">
                 <img src="./assets/images/a.svg" alt="a logo" class="project-icon" draggable="false" />
@@ -55,14 +55,14 @@
                 <span>this is my project</span>
             </div>
 
-            <!-- draggable portrait of theo -->
-            <div id="item-portrait" class="canvas-item item-portrait" draggable="false">
-                <img src="./assets/images/theo.png" alt="theo portrait" class="portrait-image" draggable="false" />
-            </div>
-
             <!-- draggable note for theo portrait -->
             <div id="note-face" class="canvas-item canvas-note" draggable="false">
                 <span>this is my real face</span>
+            </div>
+
+            <!-- pull-up peeking portrait anchored to bottom right -->
+            <div id="item-portrait" class="peeking-portrait" role="button" tabindex="0" aria-label="view theo photo" draggable="false">
+                <img src="./assets/images/theo.png" alt="theo portrait" class="portrait-image" draggable="false" />
             </div>
         </main>
         <script src="./js/home.js"></script>
