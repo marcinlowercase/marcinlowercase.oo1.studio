@@ -4,65 +4,66 @@
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="./assets/images/tom.svg" />
         <link rel="manifest" href="./manifest.json" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>marcinlowercase</title>
         <link rel="stylesheet" href="./css/global.css" />
         <link rel="stylesheet" href="./css/home.css" />
     </head>
     <body>
-        <main id="container">
-            <header class="profile">
-                <div id="avatar-toggle" class="avatar-container" role="button" tabindex="0" aria-label="toggle avatar">
-                    <img src="./assets/images/transparent_tom.svg" alt="transparent tom avatar" class="avatar avatar-default" />
-                    <img src="./assets/images/tom.svg" alt="tom avatar" class="avatar avatar-hover" />
-                </div>
-            </header>
+        <main id="canvas">
+            <!-- svg dynamic connector arrows layer -->
+            <svg id="arrows-layer" class="arrows-layer">
+                <defs>
+                    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" />
+                    </marker>
+                </defs>
+                <path id="arrow-to-w" class="canvas-arrow" marker-end="url(#arrowhead)" />
+                <path id="arrow-to-a" class="canvas-arrow" marker-end="url(#arrowhead)" />
+                <path id="arrow-to-theo" class="canvas-arrow" marker-end="url(#arrowhead)" />
+            </svg>
 
-            <section class="keyboard">
-                <!-- top letter row -->
-                <div class="row q-row">
-                    <span class="key">q</span>
-                    <!-- active project: keyboard -->
-                    <a href="https://keyboard.oo1.studio" target="_blank" rel="noopener noreferrer" class="key project" title="w — keyboard">
-                        <img src="./assets/images/w.svg" alt="w" class="key-icon" />
-                    </a>
-                    <span class="key">e</span>
-                    <span class="key">r</span>
-                    <span class="key">t</span>
-                    <span class="key">y</span>
-                    <span class="key">u</span>
-                    <span class="key">i</span>
-                    <span class="key">o</span>
-                    <span class="key">p</span>
-                </div>
+            <!-- interactive draggable logo -->
+            <div id="item-logo" class="canvas-item item-logo" role="button" tabindex="0" aria-label="toggle dark theme" draggable="false">
+                <img src="./assets/images/transparent_tom.svg" alt="transparent tom logo" class="canvas-logo logo-transparent" draggable="false" />
+                <img src="./assets/images/tom.svg" alt="solid tom logo" class="canvas-logo logo-solid" draggable="false" />
+            </div>
 
-                <!-- middle letter row -->
-                <div class="row a-row">
-                    <!-- active project: browser -->
-                    <a href="https://browser.oo1.studio" target="_blank" rel="noopener noreferrer" class="key project" title="a — browser">
-                        <img src="./assets/images/a.svg" alt="a" class="key-icon" />
-                    </a>
-                    <span class="key">s</span>
-                    <span class="key">d</span>
-                    <span class="key">f</span>
-                    <span class="key">g</span>
-                    <span class="key">h</span>
-                    <span class="key">j</span>
-                    <span class="key">k</span>
-                    <span class="key">l</span>
-                </div>
+            <!-- draggable bio card -->
+            <div id="item-bio" class="canvas-item item-bio" draggable="false">
+                <p>
+                    i am theo, an engineer and interface designer matching software to physical hardware.
+                    on GitHub and across the web, i build under the alias marcinlowercase.
+                    tom is my drawn mascot and visual alter-ego across my tools and experiments.
+                    my work centers on creating minimal computing systems, custom inputs, and tactile software at oo1 studio.
+                    drag anything around this canvas to explore.
+                </p>
+            </div>
 
-                <!-- bottom letter row -->
-                <div class="row z-row">
-                    <span class="key">z</span>
-                    <span class="key">x</span>
-                    <span class="key">c</span>
-                    <span class="key">v</span>
-                    <span class="key">b</span>
-                    <span class="key">n</span>
-                    <span class="key">m</span>
-                </div>
-            </section>
+            <!-- draggable project: browser icon only -->
+            <a id="item-project-a" href="https://browser.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="browser" draggable="false">
+                <img src="./assets/images/a.svg" alt="a logo" class="project-icon" draggable="false" />
+            </a>
+
+            <!-- draggable project: keyboard icon only -->
+            <a id="item-project-w" href="https://keyboard.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="keyboard" draggable="false">
+                <img src="./assets/images/w.svg" alt="w logo" class="project-icon" draggable="false" />
+            </a>
+
+            <!-- draggable note for projects -->
+            <div id="note-projects" class="canvas-item canvas-note" draggable="false">
+                <span>this is my project</span>
+            </div>
+
+            <!-- draggable portrait of theo -->
+            <div id="item-portrait" class="canvas-item item-portrait" draggable="false">
+                <img src="./assets/images/theo.png" alt="theo portrait" class="portrait-image" draggable="false" />
+            </div>
+
+            <!-- draggable note for theo portrait -->
+            <div id="note-face" class="canvas-item canvas-note" draggable="false">
+                <span>this is my real face</span>
+            </div>
         </main>
         <script src="./js/home.js"></script>
     </body>
