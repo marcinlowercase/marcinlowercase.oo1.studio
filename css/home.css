@@ -6,13 +6,16 @@
     overflow: hidden;
 }
 
-/* pinned top text block positioned below draggable items */
+/* pinned top text block using device corner radius for top padding */
 .top-display {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    padding: 2rem 2.5rem 1rem 2.5rem;
+    padding-top: var(--device-corner-radius);
+    padding-right: 2.5rem;
+    padding-bottom: 1rem;
+    padding-left: 2.5rem;
     display: flex;
     justify-content: center;
     z-index: 10;
@@ -44,17 +47,13 @@
     z-index: 5;
 }
 
+/* pure dotted lines without arrowheads */
 .canvas-arrow {
     fill: none;
     stroke: var(--fg);
     stroke-width: 1.5px;
-    stroke-dasharray: 4 3;
+    stroke-dasharray: 3 3;
     transition: stroke 200ms ease;
-}
-
-#arrowhead polygon {
-    fill: var(--fg);
-    transition: fill 200ms ease;
 }
 
 /* shared draggable element properties layered on top of text */
@@ -165,15 +164,15 @@ body.dark-theme .project-icon {
     filter: invert(1);
 }
 
-/* initial positions for project icon badges */
-#item-project-w {
+/* initial positions for project icon badges with a first and w second */
+#item-project-a {
     top: 42%;
-    right: 24%;
+    right: 28%;
 }
 
-#item-project-a {
+#item-project-w {
     top: 60%;
-    right: 28%;
+    right: 22%;
 }
 
 /* borderless annotation note labels using courier code */
@@ -187,6 +186,21 @@ body.dark-theme .project-icon {
     letter-spacing: 0.03em;
     z-index: 30;
     white-space: nowrap;
+}
+
+#note-marcin {
+    top: 32%;
+    left: 12%;
+}
+
+#note-planet {
+    top: 35%;
+    right: 32%;
+}
+
+#note-dinosaur {
+    top: 74%;
+    right: 25%;
 }
 
 #note-projects {
@@ -229,10 +243,13 @@ body.dark-theme .project-icon {
     filter: none !important;
 }
 
-/* mobile layout adjustments retaining 100px icon size */
+/* mobile layout adjustments */
 @media (max-width: 768px) {
     .top-display {
-        padding: 1.25rem 1rem 0.5rem 1rem;
+        padding-top: var(--device-corner-radius);
+        padding-right: 1rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
     }
 
     .display-text {
@@ -247,6 +264,11 @@ body.dark-theme .project-icon {
         height: 100px;
     }
 
+    #note-marcin {
+        top: 30%;
+        left: 8%;
+    }
+
     .item-project {
         width: 100px;
         height: 100px;
@@ -257,21 +279,33 @@ body.dark-theme .project-icon {
         height: 100px;
     }
 
-    #item-project-w {
-        top: 60%;
-        left: 8%;
+    #note-projects {
+        top: 48%;
+        left: 20%;
         right: auto;
     }
 
     #item-project-a {
-        top: 60%;
+        top: 56%;
+        left: 8%;
+        right: auto;
+    }
+
+    #note-planet {
+        top: 70%;
+        left: 8%;
+        right: auto;
+    }
+
+    #item-project-w {
+        top: 56%;
         left: 42%;
         right: auto;
     }
 
-    #note-projects {
-        top: 54%;
-        left: 8%;
+    #note-dinosaur {
+        top: 70%;
+        left: 42%;
         right: auto;
     }
 
@@ -280,7 +314,7 @@ body.dark-theme .project-icon {
     }
 
     #note-face {
-        bottom: 12%;
-        right: 8rem;
+        bottom: 13%;
+        right: 8.5rem;
     }
 }

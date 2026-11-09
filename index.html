@@ -8,9 +8,66 @@
         <title>marcinlowercase</title>
         <link rel="stylesheet" href="./css/global.css" />
         <link rel="stylesheet" href="./css/home.css" />
+
     </head>
     <body>
         <main id="canvas">
+            <!-- svg dynamic connector dotted lines layer without arrowheads -->
+            <svg id="arrows-layer" class="arrows-layer">
+                <path id="arrow-to-w" class="canvas-arrow" />
+                <path id="arrow-to-a" class="canvas-arrow" />
+                <path id="arrow-to-dinosaur" class="canvas-arrow" />
+                <path id="arrow-to-planet" class="canvas-arrow" />
+                <path id="arrow-to-tom" class="canvas-arrow" />
+                <path id="arrow-to-theo" class="canvas-arrow" />
+            </svg>
+
+            <!-- interactive draggable logo -->
+            <div id="item-logo" class="canvas-item item-logo" role="button" tabindex="0" aria-label="toggle dark theme" draggable="false">
+                <img src="./assets/images/transparent_tom.svg" alt="transparent tom logo" class="canvas-logo logo-transparent" draggable="false" />
+                <img src="./assets/images/tom.svg" alt="solid tom logo" class="canvas-logo logo-solid" draggable="false" />
+            </div>
+
+            <!-- draggable note for tom -->
+            <div id="note-marcin" class="canvas-item canvas-note" draggable="false">
+                <span>this is marcinlowercase</span>
+            </div>
+
+            <!-- draggable project: browser icon only -->
+            <a id="item-project-a" href="https://browser.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="browser" draggable="false">
+                <img src="./assets/images/a.svg" alt="a logo" class="project-icon" draggable="false" />
+            </a>
+
+            <!-- draggable note for a -->
+            <div id="note-planet" class="canvas-item canvas-note" draggable="false">
+                <span>this is a planet</span>
+            </div>
+
+            <!-- draggable project: keyboard icon only -->
+            <a id="item-project-w" href="https://keyboard.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="keyboard" draggable="false">
+                <img src="./assets/images/w.svg" alt="w logo" class="project-icon" draggable="false" />
+            </a>
+
+            <!-- draggable note for w -->
+            <div id="note-dinosaur" class="canvas-item canvas-note" draggable="false">
+                <span>this is a dinosaur</span>
+            </div>
+
+            <!-- draggable note for projects -->
+            <div id="note-projects" class="canvas-item canvas-note" draggable="false">
+                <span>this is my project</span>
+            </div>
+
+            <!-- draggable note for theo portrait -->
+            <div id="note-face" class="canvas-item canvas-note" draggable="false">
+                <span>this is theo</span>
+            </div>
+
+            <!-- pull-up peeking portrait anchored to bottom right -->
+            <div id="item-portrait" class="peeking-portrait" role="button" tabindex="0" aria-label="view theo photo" draggable="false">
+                <img src="./assets/images/theo.png" alt="theo portrait" class="portrait-image" draggable="false" />
+            </div>
+
             <!-- pinned top text display -->
             <header id="top-display" class="top-display">
                 <p id="display-text" class="display-text">
@@ -21,49 +78,6 @@
                     through oo1 studio, i match digital interfaces to physical hardware—like shaping a browser view to the exact corner radius of a phone—making tools look beautiful, even if nobody cares.
                 </p>
             </header>
-
-            <!-- svg dynamic connector arrows layer -->
-            <svg id="arrows-layer" class="arrows-layer">
-                <defs>
-                    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                        <polygon points="0 0, 8 3, 0 6" />
-                    </marker>
-                </defs>
-                <path id="arrow-to-w" class="canvas-arrow" marker-end="url(#arrowhead)" />
-                <path id="arrow-to-a" class="canvas-arrow" marker-end="url(#arrowhead)" />
-                <path id="arrow-to-theo" class="canvas-arrow" marker-end="url(#arrowhead)" />
-            </svg>
-
-            <!-- interactive draggable logo -->
-            <div id="item-logo" class="canvas-item item-logo" role="button" tabindex="0" aria-label="toggle dark theme" draggable="false">
-                <img src="./assets/images/transparent_tom.svg" alt="transparent tom logo" class="canvas-logo logo-transparent" draggable="false" />
-                <img src="./assets/images/tom.svg" alt="solid tom logo" class="canvas-logo logo-solid" draggable="false" />
-            </div>
-
-            <!-- draggable project: browser icon only -->
-            <a id="item-project-a" href="https://browser.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="browser" draggable="false">
-                <img src="./assets/images/a.svg" alt="a logo" class="project-icon" draggable="false" />
-            </a>
-
-            <!-- draggable project: keyboard icon only -->
-            <a id="item-project-w" href="https://keyboard.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="keyboard" draggable="false">
-                <img src="./assets/images/w.svg" alt="w logo" class="project-icon" draggable="false" />
-            </a>
-
-            <!-- draggable note for projects -->
-            <div id="note-projects" class="canvas-item canvas-note" draggable="false">
-                <span>this is my project</span>
-            </div>
-
-            <!-- draggable note for theo portrait -->
-            <div id="note-face" class="canvas-item canvas-note" draggable="false">
-                <span>this is my real face</span>
-            </div>
-
-            <!-- pull-up peeking portrait anchored to bottom right -->
-            <div id="item-portrait" class="peeking-portrait" role="button" tabindex="0" aria-label="view theo photo" draggable="false">
-                <img src="./assets/images/theo.png" alt="theo portrait" class="portrait-image" draggable="false" />
-            </div>
         </main>
         <script src="./js/home.js"></script>
     </body>

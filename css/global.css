@@ -1,3 +1,6 @@
+/* import outsync tokens while keeping maximum two css files linked in html */
+@import url("https://assets.oo1.studio/outsync.css");
+
 @font-face {
     font-family: "vga";
     src: url("../assets/fonts/perfect_dos_vga_437.ttf") format("truetype");
