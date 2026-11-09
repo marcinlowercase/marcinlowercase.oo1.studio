@@ -1,0 +1,149 @@
+/* page container */
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    width: 100%;
+}
+
+/* avatar styling */
+.profile {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-container {
+    position: relative;
+    width: 6.5rem;
+    height: 6.5rem;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+
+.avatar-default {
+    opacity: 1;
+    transition: opacity 120ms ease;
+}
+
+.avatar-hover {
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+/* desktop hover state */
+@media (hover: hover) {
+    .avatar-container:hover .avatar-default {
+        opacity: 0;
+    }
+
+    .avatar-container:hover .avatar-hover {
+        opacity: 1;
+    }
+}
+
+/* tap toggle active state */
+.avatar-container.active .avatar-default {
+    opacity: 0;
+}
+
+.avatar-container.active .avatar-hover {
+    opacity: 1;
+}
+
+/* typewriter keyboard container */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    width: fit-content;
+    user-select: none;
+}
+
+/* row base */
+.row {
+    display: flex;
+    gap: var(--gap);
+    justify-content: flex-start;
+}
+
+/* typewriter mechanical stagger */
+.q-row {
+    margin-left: 0;
+}
+
+.a-row {
+    margin-left: calc((var(--key-size) + var(--gap)) * (1 / 3));
+}
+
+.z-row {
+    margin-left: calc(((var(--key-size) + var(--gap)) * (1 / 3)) + ((var(--key-size) + var(--gap)) * 0.5));
+}
+
+/* uniform character key */
+.key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: var(--key-size);
+    height: var(--key-size);
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+    color: var(--fg);
+    font-size: 1.1rem;
+    cursor: default;
+    transition: background-color 100ms, color 100ms;
+}
+
+/* active project keycap */
+.key.project {
+    cursor: pointer;
+    background-color: var(--bg);
+}
+
+.key.project .key-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    object-fit: contain;
+    display: block;
+}
+
+/* hover states */
+.key.project:hover {
+    background-color: var(--hover-bg);
+}
+
+.key.project:hover .key-icon {
+    filter: invert(1);
+}
+
+/* responsive scaling for small screens */
+@media (max-width: 768px) {
+    :root {
+        --key-size: 2.2rem;
+        --gap: 0.25rem;
+    }
+
+    .key {
+        font-size: 0.85rem;
+    }
+
+    .key.project .key-icon {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}

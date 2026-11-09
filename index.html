@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="./assets/images/tom.svg" />
+        <link rel="manifest" href="./manifest.json" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>marcinlowercase</title>
+        <link rel="stylesheet" href="./css/global.css" />
+        <link rel="stylesheet" href="./css/home.css" />
+    </head>
+    <body>
+        <main id="container">
+            <header class="profile">
+                <div id="avatar-toggle" class="avatar-container" role="button" tabindex="0" aria-label="toggle avatar">
+                    <img src="./assets/images/transparent_tom.svg" alt="transparent tom avatar" class="avatar avatar-default" />
+                    <img src="./assets/images/tom.svg" alt="tom avatar" class="avatar avatar-hover" />
+                </div>
+            </header>
+
+            <section class="keyboard">
+                <!-- top letter row -->
+                <div class="row q-row">
+                    <span class="key">q</span>
+                    <!-- active project: keyboard -->
+                    <a href="https://keyboard.oo1.studio" target="_blank" rel="noopener noreferrer" class="key project" title="w — keyboard">
+                        <img src="./assets/images/w.svg" alt="w" class="key-icon" />
+                    </a>
+                    <span class="key">e</span>
+                    <span class="key">r</span>
+                    <span class="key">t</span>
+                    <span class="key">y</span>
+                    <span class="key">u</span>
+                    <span class="key">i</span>
+                    <span class="key">o</span>
+                    <span class="key">p</span>
+                </div>
+
+                <!-- middle letter row -->
+                <div class="row a-row">
+                    <!-- active project: browser -->
+                    <a href="https://browser.oo1.studio" target="_blank" rel="noopener noreferrer" class="key project" title="a — browser">
+                        <img src="./assets/images/a.svg" alt="a" class="key-icon" />
+                    </a>
+                    <span class="key">s</span>
+                    <span class="key">d</span>
+                    <span class="key">f</span>
+                    <span class="key">g</span>
+                    <span class="key">h</span>
+                    <span class="key">j</span>
+                    <span class="key">k</span>
+                    <span class="key">l</span>
+                </div>
+
+                <!-- bottom letter row -->
+                <div class="row z-row">
+                    <span class="key">z</span>
+                    <span class="key">x</span>
+                    <span class="key">c</span>
+                    <span class="key">v</span>
+                    <span class="key">b</span>
+                    <span class="key">n</span>
+                    <span class="key">m</span>
+                </div>
+            </section>
+        </main>
+        <script src="./js/home.js"></script>
+    </body>
+</html>
