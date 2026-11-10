@@ -1,26 +1,22 @@
 // dynamic z-index counter starting above the top text display
 let highestZ = 100;
 
-// default landing intro text and item descriptions
-const defaultText = `i am a developer focused on things you can see, touch, and feel. graduated in computer systems technology from saskatchewan polytechnic, i build purely from imagination and originality under the names theo and marc. i love c for its purity and css for its craft, with no interest in backend logic, corporate buzzwords, or LeetCode problems. i am not a designer or a founder; i simply make software in the exact way i want it to look. through oo1 studio, i match digital interfaces to physical hardware—like shaping a browser view to the exact corner radius of a phone—making tools look beautiful, even if nobody cares.`;
+// default landing intro text with link and item descriptions
+const defaultText = `I am Theo a.k.a. marcinlowercase, the developer of <a href="https://oo1.studio" target="_blank" rel="noopener noreferrer">oo1 studio</a>`;
 
 const itemDescriptions = {
-    "item-logo": "tom is my mascot and visual counterpart, representing the creative identity across oo1 studio.",
-    "item-project-w": "keyboard is an experimental web input project matching tactile mechanical keys to digital screens.",
-    "item-project-a": "browser is a custom webview interface shaped to align with physical phone corner radii.",
-    "item-portrait": "a raw webcam portrait of theo, captured directly from the computer screen with zero filters.",
-    "note-projects": "individual tools and software systems built under oo1 studio.",
-    "note-dinosaur": "w takes the form and posture of a dinosaur.",
-    "note-planet": "a takes the curved silhouette of an orbital globe or planet.",
-    "note-marcin": "tom represents the username marcinlowercase across my code and designs.",
-    "note-face": "theo in real life, captured naturally."
+    "item-logo": "this is the sign of marcinlowercase and Theo",
+    "item-project-w": "the keyboard focusing on fast and precise typing experience",
+    "item-project-a": "the run time that allow web code to access low level hardware on Android",
+    "item-portrait": "Theo on November 9, 2026",
+    "note-face": "pull up the photo below to see Theo in real life."
 };
 
 const displayText = document.getElementById("display-text");
 
-function setDisplayText(text) {
+function setDisplayText(content) {
     if (!displayText) return;
-    displayText.textContent = text;
+    displayText.innerHTML = content;
 }
 
 // desktop hover listeners for descriptions
@@ -75,7 +71,7 @@ function getBoundaryPoint(rect, targetX, targetY, padding = 4) {
     };
 }
 
-// svg dynamic curved dotted lines updater with collision auto-hide
+// svg dynamic curved dotted lines updater
 function updatePath(pathId, fromEl, toEl, curveOffset = 25) {
     const path = document.getElementById(pathId);
     if (!path || !fromEl || !toEl) return;
@@ -83,7 +79,6 @@ function updatePath(pathId, fromEl, toEl, curveOffset = 25) {
     const fromRect = fromEl.getBoundingClientRect();
     const toRect = toEl.getBoundingClientRect();
 
-    // hide dotted line completely when text touches or overlays the target image
     if (isOverlapping(fromRect, toRect, 6)) {
         path.setAttribute("d", "");
         return;
@@ -115,10 +110,9 @@ function updatePath(pathId, fromEl, toEl, curveOffset = 25) {
     const controlX = midX + perpX * curveOffset;
     const controlY = midY + perpY * curveOffset;
 
-    const start = getBoundaryPoint(fromRect, controlX, controlY, 3);
+    const start = getBoundaryPoint(fromRect, controlX, controlY, 4);
     const end = getBoundaryPoint(toRect, controlX, controlY, 4);
 
-    // check if endpoints have collapsed or crossed each other
     const dotProduct = (end.x - start.x) * deltaX + (end.y - start.y) * deltaY;
     if (dotProduct <= 0) {
         path.setAttribute("d", "");
@@ -131,37 +125,30 @@ function updatePath(pathId, fromEl, toEl, curveOffset = 25) {
     );
 }
 
-function updateAllArrows() {
-    const noteProjects = document.getElementById("note-projects");
-    const noteDinosaur = document.getElementById("note-dinosaur");
-    const notePlanet = document.getElementById("note-planet");
-    const noteMarcin = document.getElementById("note-marcin");
-    const noteFace = document.getElementById("note-face");
-
-    const projectW = document.getElementById("item-project-w");
-    const projectA = document.getElementById("item-project-a");
+// update all active dotted connector lines
+function updateAllLines() {
     const logo = document.getElementById("item-logo");
+    const projectA = document.getElementById("item-project-a");
+    const projectW = document.getElementById("item-project-w");
+    const noteFace = document.getElementById("note-face");
     const portrait = document.getElementById("item-portrait");
 
-    updatePath("arrow-to-w", noteProjects, projectW, -20);
-    updatePath("arrow-to-a", noteProjects, projectA, 20);
-    updatePath("arrow-to-dinosaur", noteDinosaur, projectW, 15);
-    updatePath("arrow-to-planet", notePlanet, projectA, -15);
-    updatePath("arrow-to-tom", noteMarcin, logo, -20);
-    updatePath("arrow-to-theo", noteFace, portrait, 25);
+    updatePath("line-tom-to-a", logo, projectA, 20);
+    updatePath("line-tom-to-w", logo, projectW, -20);
+    updatePath("line-note-to-theo", noteFace, portrait, 22);
 }
 
 // continuous line tracking during spring release animation
-function animateArrowFollow() {
+function animateLineFollow() {
     const startTime = performance.now();
     const duration = 340;
 
     function step(now) {
-        updateAllArrows();
+        updateAllLines();
         if (now - startTime < duration) {
             requestAnimationFrame(step);
         } else {
-            updateAllArrows();
+            updateAllLines();
         }
     }
     requestAnimationFrame(step);
@@ -211,9 +198,8 @@ function makeDraggable(element) {
             element.style.top = `${initialTop + deltaY}px`;
             element.style.right = "auto";
             element.style.bottom = "auto";
-            element.style.transform = "none";
 
-            updateAllArrows();
+            updateAllLines();
         };
 
         const onPointerUp = (upEvent) => {
@@ -245,7 +231,7 @@ function makeDraggable(element) {
 const draggableItems = document.querySelectorAll(".canvas-item");
 draggableItems.forEach((item) => makeDraggable(item));
 
-// pull-up peeking portrait behavior with auto-reset and touch description
+// pull-up peeking portrait behavior with auto-reset and line tracking
 const peekingPortrait = document.getElementById("item-portrait");
 
 if (peekingPortrait) {
@@ -289,7 +275,7 @@ if (peekingPortrait) {
             if (nextY > restingOffsetY) nextY = restingOffsetY;
 
             peekingPortrait.style.transform = `translateY(${nextY}px)`;
-            updateAllArrows();
+            updateAllLines();
         };
 
         const onPortraitUp = (upEvent) => {
@@ -299,7 +285,7 @@ if (peekingPortrait) {
             peekingPortrait.removeEventListener("pointercancel", onPortraitUp);
 
             peekingPortrait.style.transform = "";
-            animateArrowFollow();
+            animateLineFollow();
 
             if (upEvent.pointerType === "touch" || !peekingPortrait.matches(":hover")) {
                 setDisplayText(defaultText);
@@ -312,10 +298,10 @@ if (peekingPortrait) {
     });
 }
 
-// initial arrows calculation and window resize handler
-window.addEventListener("load", updateAllArrows);
-window.addEventListener("resize", updateAllArrows);
-requestAnimationFrame(updateAllArrows);
+// initial lines calculation and window resize handler
+window.addEventListener("load", updateAllLines);
+window.addEventListener("resize", updateAllLines);
+requestAnimationFrame(updateAllLines);
 
 // theme inversion logic via logo hover on desktop and tap on mobile
 const logoItem = document.getElementById("item-logo");

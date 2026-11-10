@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-/* pinned top text block using device corner radius for top padding */
+/* pinned top text block positioned below draggable items */
 .top-display {
     position: fixed;
     top: 0;
@@ -36,6 +36,11 @@
     transition: opacity 120ms ease;
 }
 
+/* enable clicking on links inside the top text */
+.display-text a {
+    pointer-events: auto;
+}
+
 /* svg connector lines overlay */
 .arrows-layer {
     position: absolute;
@@ -47,7 +52,7 @@
     z-index: 5;
 }
 
-/* pure dotted lines without arrowheads */
+/* pure dotted lines connecting tom to projects */
 .canvas-arrow {
     fill: none;
     stroke: var(--fg);
@@ -66,7 +71,7 @@
     -webkit-user-drag: none;
     user-drag: none;
     z-index: 20;
-    transition: transform 120ms ease, background-color 200ms ease, color 200ms ease;
+    transition: transform 160ms ease, background-color 200ms ease, color 200ms ease;
 }
 
 /* disable native dragging on all child images and links */
@@ -85,19 +90,20 @@
 /* logo container scaled to 100px */
 .item-logo {
     top: 40%;
-    left: 15%;
+    left: 24%;
     width: 100px;
     height: 100px;
     z-index: 25;
 }
 
+/* zoom larger on hover or finger touch down */
 .item-logo:hover {
-    transform: scale(1.08);
+    transform: scale(1.14);
 }
 
 .item-logo:active,
 .item-logo.dragging {
-    transform: scale(0.96);
+    transform: scale(1.18);
 }
 
 .canvas-logo {
@@ -130,7 +136,7 @@ body.dark-theme .logo-solid {
     opacity: 1;
 }
 
-/* borderless project logo icons scaled to 100px */
+/* borderless project logo icons */
 .item-project {
     display: flex;
     align-items: center;
@@ -140,16 +146,18 @@ body.dark-theme .logo-solid {
     background: transparent;
     border: none;
     box-shadow: none;
+    text-decoration: none;
     z-index: 25;
 }
 
+/* zoom larger on hover or finger touch down */
 .item-project:hover {
-    transform: scale(1.08);
+    transform: scale(1.14);
 }
 
 .item-project:active,
 .item-project.dragging {
-    transform: scale(0.96);
+    transform: scale(1.18);
 }
 
 .project-icon {
@@ -175,7 +183,7 @@ body.dark-theme .project-icon {
     right: 22%;
 }
 
-/* borderless annotation note labels using courier code */
+/* borderless annotation note label */
 .canvas-note {
     padding: 0.2rem 0.4rem;
     background: transparent;
@@ -186,26 +194,6 @@ body.dark-theme .project-icon {
     letter-spacing: 0.03em;
     z-index: 30;
     white-space: nowrap;
-}
-
-#note-marcin {
-    top: 32%;
-    left: 12%;
-}
-
-#note-planet {
-    top: 35%;
-    right: 32%;
-}
-
-#note-dinosaur {
-    top: 74%;
-    right: 25%;
-}
-
-#note-projects {
-    top: 50%;
-    right: 7%;
 }
 
 #note-face {
@@ -264,11 +252,6 @@ body.dark-theme .project-icon {
         height: 100px;
     }
 
-    #note-marcin {
-        top: 30%;
-        left: 8%;
-    }
-
     .item-project {
         width: 100px;
         height: 100px;
@@ -279,32 +262,14 @@ body.dark-theme .project-icon {
         height: 100px;
     }
 
-    #note-projects {
-        top: 48%;
-        left: 20%;
-        right: auto;
-    }
-
     #item-project-a {
         top: 56%;
         left: 8%;
         right: auto;
     }
 
-    #note-planet {
-        top: 70%;
-        left: 8%;
-        right: auto;
-    }
-
     #item-project-w {
         top: 56%;
-        left: 42%;
-        right: auto;
-    }
-
-    #note-dinosaur {
-        top: 70%;
         left: 42%;
         right: auto;
     }

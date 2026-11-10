@@ -8,18 +8,14 @@
         <title>marcinlowercase</title>
         <link rel="stylesheet" href="./css/global.css" />
         <link rel="stylesheet" href="./css/home.css" />
-
     </head>
     <body>
         <main id="canvas">
-            <!-- svg dynamic connector dotted lines layer without arrowheads -->
+            <!-- svg dynamic connector dotted lines -->
             <svg id="arrows-layer" class="arrows-layer">
-                <path id="arrow-to-w" class="canvas-arrow" />
-                <path id="arrow-to-a" class="canvas-arrow" />
-                <path id="arrow-to-dinosaur" class="canvas-arrow" />
-                <path id="arrow-to-planet" class="canvas-arrow" />
-                <path id="arrow-to-tom" class="canvas-arrow" />
-                <path id="arrow-to-theo" class="canvas-arrow" />
+                <path id="line-tom-to-a" class="canvas-arrow" />
+                <path id="line-tom-to-w" class="canvas-arrow" />
+                <path id="line-note-to-theo" class="canvas-arrow" />
             </svg>
 
             <!-- interactive draggable logo -->
@@ -28,39 +24,19 @@
                 <img src="./assets/images/tom.svg" alt="solid tom logo" class="canvas-logo logo-solid" draggable="false" />
             </div>
 
-            <!-- draggable note for tom -->
-            <div id="note-marcin" class="canvas-item canvas-note" draggable="false">
-                <span>this is marcinlowercase</span>
-            </div>
-
-            <!-- draggable project: browser icon only -->
+            <!-- draggable project: browser icon -->
             <a id="item-project-a" href="https://browser.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="browser" draggable="false">
                 <img src="./assets/images/a.svg" alt="a logo" class="project-icon" draggable="false" />
             </a>
 
-            <!-- draggable note for a -->
-            <div id="note-planet" class="canvas-item canvas-note" draggable="false">
-                <span>this is a planet</span>
-            </div>
-
-            <!-- draggable project: keyboard icon only -->
+            <!-- draggable project: keyboard icon -->
             <a id="item-project-w" href="https://keyboard.oo1.studio" target="_blank" rel="noopener noreferrer" class="canvas-item item-project" title="keyboard" draggable="false">
                 <img src="./assets/images/w.svg" alt="w logo" class="project-icon" draggable="false" />
             </a>
 
-            <!-- draggable note for w -->
-            <div id="note-dinosaur" class="canvas-item canvas-note" draggable="false">
-                <span>this is a dinosaur</span>
-            </div>
-
-            <!-- draggable note for projects -->
-            <div id="note-projects" class="canvas-item canvas-note" draggable="false">
-                <span>this is my project</span>
-            </div>
-
             <!-- draggable note for theo portrait -->
             <div id="note-face" class="canvas-item canvas-note" draggable="false">
-                <span>this is theo</span>
+                <span>pull up to see Theo</span>
             </div>
 
             <!-- pull-up peeking portrait anchored to bottom right -->
@@ -68,14 +44,10 @@
                 <img src="./assets/images/theo.png" alt="theo portrait" class="portrait-image" draggable="false" />
             </div>
 
-            <!-- pinned top text display -->
+            <!-- pinned top text display with link to oo1 studio -->
             <header id="top-display" class="top-display">
                 <p id="display-text" class="display-text">
-                    i am a developer focused on things you can see, touch, and feel.
-                    graduated in computer systems technology from saskatchewan polytechnic, i build purely from imagination and originality under the names theo and marc.
-                    i love c for its purity and css for its craft, with no interest in backend logic, corporate buzzwords, or LeetCode problems.
-                    i am not a designer or a founder; i simply make software in the exact way i want it to look.
-                    through oo1 studio, i match digital interfaces to physical hardware—like shaping a browser view to the exact corner radius of a phone—making tools look beautiful, even if nobody cares.
+                    I am Theo a.k.a. marcinlowercase, the developer of <a href="https://oo1.studio" target="_blank" rel="noopener noreferrer">oo1 studio</a>
                 </p>
             </header>
         </main>
