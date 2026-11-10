@@ -7,7 +7,7 @@ const defaultText = `I am Theo a.k.a. marcinlowercase, the developer of <a href=
 const itemDescriptions = {
     "item-logo": "this is the sign of marcinlowercase and Theo",
     "item-project-w": "the keyboard focusing on fast and precise typing experience",
-    "item-project-a": "the run time that allow web code to access low level hardware on Android",
+    "item-project-a": "the runtime that allow web code to access low level hardware on Android",
     "item-portrait": "Theo on November 9, 2026",
     "note-face": "pull up the photo below to see Theo in real life."
 };
