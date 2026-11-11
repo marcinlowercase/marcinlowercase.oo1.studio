@@ -3,11 +3,12 @@ let highestZ = 100;
 
 // default landing intro text with link and item descriptions
 const defaultText = `i am Theo and marcinlowercase and the developer of <a href="https://oo1.studio" target="_blank" rel="noopener noreferrer">oo1 studio</a>`;
+
 const itemDescriptions = {
     "item-logo": "this is the sign of marcinlowercase and Theo",
     "item-project-w": "built for coding and terminal on mobile",
     "item-project-a": "run web apps on mobile without hosting",
-    "item-portrait": "Theo on November 9, 2026"
+    "item-portrait": "Theo on november 9 2026"
 };
 
 const displayText = document.getElementById("display-text");
@@ -152,7 +153,7 @@ function animateLineFollow() {
     requestAnimationFrame(step);
 }
 
-// pointer drag handler with real-time dark inversion when dragging tom
+// pointer drag handler
 const logoItem = document.getElementById("item-logo");
 let isDarkToggled = false;
 
@@ -194,7 +195,6 @@ function makeDraggable(element) {
                     setDisplayText(itemDescriptions[element.id]);
                 }
 
-                // dragging tom turns background black and inverts colors in real time
                 if (element.id === "item-logo") {
                     document.body.classList.add("dark-theme");
                     element.classList.add("is-solid");
@@ -219,7 +219,6 @@ function makeDraggable(element) {
             if (hasMoved) {
                 element.classList.remove("dragging");
 
-                // revert dark theme if tom was only dragged and not toggled
                 if (element.id === "item-logo" && !isDarkToggled) {
                     document.body.classList.remove("dark-theme");
                     element.classList.remove("is-solid");
@@ -316,7 +315,7 @@ if (peekingPortrait) {
     });
 }
 
-// initial lines calculation and window resize handler
+// initial calculations and window resize listeners
 window.addEventListener("load", updateAllLines);
 window.addEventListener("resize", updateAllLines);
 requestAnimationFrame(updateAllLines);

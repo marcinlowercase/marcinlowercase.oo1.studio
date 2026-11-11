@@ -50,9 +50,10 @@ body {
     transition: background-color 200ms ease, color 200ms ease;
 }
 
-/* all links blue with underline */
+/* links adapt to foreground color with underline */
 a {
-    color: blue;
+    color: var(--fg);
     text-decoration: underline;
     cursor: pointer;
+    transition: color 200ms ease;
 }

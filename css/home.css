@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-/* pinned top text block positioned below draggable items */
+/* pinned top text block using device corner radius for top and left padding */
 .top-display {
     position: fixed;
     top: 0;
@@ -15,13 +15,14 @@
     padding-top: var(--device-corner-radius);
     padding-right: 2.5rem;
     padding-bottom: 1rem;
-    padding-left: 2.5rem;
+    padding-left: var(--device-corner-radius);
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     z-index: 10;
     pointer-events: none;
 }
 
+/* left-aligned text at 1rem */
 .display-text {
     max-width: 48rem;
     width: 100%;
@@ -29,9 +30,9 @@
     padding: 0;
     font-family: var(--font-mono);
     font-size: 1rem;
-    line-height: 1.65;
-    text-align: justify;
+    line-height: 1.6;
     letter-spacing: 0.01em;
+    text-align: left;
     pointer-events: none;
     transition: opacity 120ms ease;
 }
@@ -96,7 +97,6 @@
     z-index: 25;
 }
 
-/* tom and transparent tom stay completely untouched by dark mode filters */
 .canvas-logo {
     position: absolute;
     top: 0;
@@ -239,7 +239,6 @@ body.dark-theme .project-icon {
     transition: none;
 }
 
-/* theo photo stays completely untouched by dark mode filters */
 .portrait-image {
     width: 100%;
     height: auto;
@@ -252,14 +251,15 @@ body.dark-theme .project-icon {
 @media (max-width: 768px) {
     .top-display {
         padding-top: var(--device-corner-radius);
-        padding-right: 1rem;
+        padding-right: var(--device-corner-radius);
         padding-bottom: 0.5rem;
-        padding-left: 1rem;
+        padding-left: var(--device-corner-radius);
     }
 
     .display-text {
         font-size: 1rem;
-        line-height: 1.45;
+        line-height: 1.5;
+        text-align: left;
     }
 
     .item-logo {
