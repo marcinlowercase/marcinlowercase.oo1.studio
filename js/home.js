@@ -2,14 +2,12 @@
 let highestZ = 100;
 
 // default landing intro text with link and item descriptions
-const defaultText = `I am Theo a.k.a. marcinlowercase, the developer of <a href="https://oo1.studio" target="_blank" rel="noopener noreferrer">oo1 studio</a>`;
-
+const defaultText = `i am Theo and marcinlowercase and the developer of <a href="https://oo1.studio" target="_blank" rel="noopener noreferrer">oo1 studio</a>`;
 const itemDescriptions = {
     "item-logo": "this is the sign of marcinlowercase and Theo",
-    "item-project-w": "the keyboard focusing on fast and precise typing experience",
-    "item-project-a": "the runtime that allow web code to access low level hardware on Android",
-    "item-portrait": "Theo on November 9, 2026",
-    "note-face": "pull up the photo below to see Theo in real life."
+    "item-project-w": "built for coding and terminal on mobile",
+    "item-project-a": "run web apps on mobile without hosting",
+    "item-portrait": "Theo on November 9, 2026"
 };
 
 const displayText = document.getElementById("display-text");
@@ -19,8 +17,8 @@ function setDisplayText(content) {
     displayText.innerHTML = content;
 }
 
-// desktop hover listeners for descriptions
-const hasPointer = window.matchMedia("(hover: hover)").matches;
+// desktop-only hover listeners for descriptions
+const hasPointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 if (hasPointer) {
     Object.keys(itemDescriptions).forEach((id) => {
@@ -154,7 +152,10 @@ function animateLineFollow() {
     requestAnimationFrame(step);
 }
 
-// universal pointer drag handler with touch description switching
+// pointer drag handler with real-time dark inversion when dragging tom
+const logoItem = document.getElementById("item-logo");
+let isDarkToggled = false;
+
 function makeDraggable(element) {
     let startX = 0;
     let startY = 0;
@@ -169,10 +170,6 @@ function makeDraggable(element) {
     element.addEventListener("pointerdown", (event) => {
         if (event.button !== 0) return;
 
-        if (itemDescriptions[element.id]) {
-            setDisplayText(itemDescriptions[element.id]);
-        }
-
         hasMoved = false;
         highestZ++;
         element.style.zIndex = highestZ;
@@ -184,35 +181,56 @@ function makeDraggable(element) {
         initialTop = rect.top;
 
         element.setPointerCapture(event.pointerId);
-        element.classList.add("dragging");
 
         const onPointerMove = (moveEvent) => {
             const deltaX = moveEvent.clientX - startX;
             const deltaY = moveEvent.clientY - startY;
 
-            if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
+            if (!hasMoved && (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5)) {
                 hasMoved = true;
+                element.classList.add("dragging");
+
+                if (itemDescriptions[element.id]) {
+                    setDisplayText(itemDescriptions[element.id]);
+                }
+
+                // dragging tom turns background black and inverts colors in real time
+                if (element.id === "item-logo") {
+                    document.body.classList.add("dark-theme");
+                    element.classList.add("is-solid");
+                }
             }
 
-            element.style.left = `${initialLeft + deltaX}px`;
-            element.style.top = `${initialTop + deltaY}px`;
-            element.style.right = "auto";
-            element.style.bottom = "auto";
+            if (hasMoved) {
+                element.style.left = `${initialLeft + deltaX}px`;
+                element.style.top = `${initialTop + deltaY}px`;
+                element.style.right = "auto";
+                element.style.bottom = "auto";
 
-            updateAllLines();
+                updateAllLines();
+            }
         };
 
         const onPointerUp = (upEvent) => {
-            element.classList.remove("dragging");
             element.removeEventListener("pointermove", onPointerMove);
             element.removeEventListener("pointerup", onPointerUp);
             element.removeEventListener("pointercancel", onPointerUp);
 
-            if (upEvent.pointerType === "touch" || !element.matches(":hover")) {
-                setDisplayText(defaultText);
-            }
-
             if (hasMoved) {
+                element.classList.remove("dragging");
+
+                // revert dark theme if tom was only dragged and not toggled
+                if (element.id === "item-logo" && !isDarkToggled) {
+                    document.body.classList.remove("dark-theme");
+                    element.classList.remove("is-solid");
+                }
+
+                if (itemDescriptions[element.id]) {
+                    if (upEvent.pointerType === "touch" || !element.matches(":hover")) {
+                        setDisplayText(defaultText);
+                    }
+                }
+
                 const preventClick = (clickEvent) => {
                     clickEvent.preventDefault();
                     clickEvent.stopPropagation();
@@ -303,21 +321,20 @@ window.addEventListener("load", updateAllLines);
 window.addEventListener("resize", updateAllLines);
 requestAnimationFrame(updateAllLines);
 
-// theme inversion logic via logo hover on desktop and tap on mobile
-const logoItem = document.getElementById("item-logo");
-let isDarkToggled = false;
-
+// theme and logo solid toggle logic on tap
 if (logoItem) {
     if (hasPointer) {
         logoItem.addEventListener("mouseenter", () => {
             if (!isDarkToggled) {
                 document.body.classList.add("dark-theme");
+                logoItem.classList.add("is-solid");
             }
         });
 
         logoItem.addEventListener("mouseleave", () => {
             if (!isDarkToggled) {
                 document.body.classList.remove("dark-theme");
+                logoItem.classList.remove("is-solid");
             }
         });
     }
@@ -325,6 +342,7 @@ if (logoItem) {
     logoItem.addEventListener("click", () => {
         isDarkToggled = !isDarkToggled;
         document.body.classList.toggle("dark-theme", isDarkToggled);
+        logoItem.classList.toggle("is-solid", isDarkToggled);
     });
 
     logoItem.addEventListener("keydown", (event) => {
@@ -332,6 +350,7 @@ if (logoItem) {
             event.preventDefault();
             isDarkToggled = !isDarkToggled;
             document.body.classList.toggle("dark-theme", isDarkToggled);
+            logoItem.classList.toggle("is-solid", isDarkToggled);
         }
     });
 }
