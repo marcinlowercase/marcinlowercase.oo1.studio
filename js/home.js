@@ -70,8 +70,8 @@ function getBoundaryPoint(rect, targetX, targetY, padding = 4) {
     };
 }
 
-// svg dynamic curved dotted lines updater
-function updatePath(pathId, fromEl, toEl, curveOffset = 25) {
+// svg dynamic straight dotted lines updater
+function updatePath(pathId, fromEl, toEl) {
     const path = document.getElementById(pathId);
     if (!path || !fromEl || !toEl) return;
 
@@ -102,15 +102,9 @@ function updatePath(pathId, fromEl, toEl, curveOffset = 25) {
         return;
     }
 
-    const perpX = -deltaY / distance;
-    const perpY = deltaX / distance;
-    const midX = (fromCenter.x + toCenter.x) / 2;
-    const midY = (fromCenter.y + toCenter.y) / 2;
-    const controlX = midX + perpX * curveOffset;
-    const controlY = midY + perpY * curveOffset;
-
-    const start = getBoundaryPoint(fromRect, controlX, controlY, 4);
-    const end = getBoundaryPoint(toRect, controlX, controlY, 4);
+    // calculate boundary points directly on the direct line of sight
+    const start = getBoundaryPoint(fromRect, toCenter.x, toCenter.y, 4);
+    const end = getBoundaryPoint(toRect, fromCenter.x, fromCenter.y, 4);
 
     const dotProduct = (end.x - start.x) * deltaX + (end.y - start.y) * deltaY;
     if (dotProduct <= 0) {
@@ -118,13 +112,14 @@ function updatePath(pathId, fromEl, toEl, curveOffset = 25) {
         return;
     }
 
+    // straight line path
     path.setAttribute(
         "d",
-        `M ${start.x} ${start.y} Q ${controlX} ${controlY} ${end.x} ${end.y}`
+        `M ${start.x} ${start.y} L ${end.x} ${end.y}`
     );
 }
 
-// update all active dotted connector lines
+// update all active straight dotted connector lines
 function updateAllLines() {
     const logo = document.getElementById("item-logo");
     const projectA = document.getElementById("item-project-a");
@@ -132,9 +127,9 @@ function updateAllLines() {
     const noteFace = document.getElementById("note-face");
     const portrait = document.getElementById("item-portrait");
 
-    updatePath("line-tom-to-a", logo, projectA, 20);
-    updatePath("line-tom-to-w", logo, projectW, -20);
-    updatePath("line-note-to-theo", noteFace, portrait, 22);
+    updatePath("line-tom-to-a", logo, projectA);
+    updatePath("line-tom-to-w", logo, projectW);
+    updatePath("line-note-to-theo", noteFace, portrait);
 }
 
 // continuous line tracking during spring release animation
@@ -169,7 +164,6 @@ function makeDraggable(element) {
         event.preventDefault();
     });
 
-    // only block clicks that occur immediately within 150ms of a drag
     element.addEventListener("click", (event) => {
         if (Date.now() - dragEndTime < 150) {
             event.preventDefault();
