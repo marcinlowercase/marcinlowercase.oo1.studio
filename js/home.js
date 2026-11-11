@@ -8,7 +8,7 @@ const itemDescriptions = {
     "item-logo": "this is the sign of marcinlowercase and Theo",
     "item-project-w": "built for coding and terminal on mobile",
     "item-project-a": "run web apps on mobile without hosting",
-    "item-portrait": "Theo on november 9 2026"
+    "item-portrait": "Theo on November 9, 2026"
 };
 
 const displayText = document.getElementById("display-text");
@@ -153,7 +153,7 @@ function animateLineFollow() {
     requestAnimationFrame(step);
 }
 
-// pointer drag handler
+// pointer drag handler with time-based ghost click prevention
 const logoItem = document.getElementById("item-logo");
 let isDarkToggled = false;
 
@@ -163,10 +163,19 @@ function makeDraggable(element) {
     let initialLeft = 0;
     let initialTop = 0;
     let hasMoved = false;
+    let dragEndTime = 0;
 
     element.addEventListener("dragstart", (event) => {
         event.preventDefault();
     });
+
+    // only block clicks that occur immediately within 150ms of a drag
+    element.addEventListener("click", (event) => {
+        if (Date.now() - dragEndTime < 150) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }, { capture: true });
 
     element.addEventListener("pointerdown", (event) => {
         if (event.button !== 0) return;
@@ -217,6 +226,7 @@ function makeDraggable(element) {
             element.removeEventListener("pointercancel", onPointerUp);
 
             if (hasMoved) {
+                dragEndTime = Date.now();
                 element.classList.remove("dragging");
 
                 if (element.id === "item-logo" && !isDarkToggled) {
@@ -229,12 +239,6 @@ function makeDraggable(element) {
                         setDisplayText(defaultText);
                     }
                 }
-
-                const preventClick = (clickEvent) => {
-                    clickEvent.preventDefault();
-                    clickEvent.stopPropagation();
-                };
-                element.addEventListener("click", preventClick, { capture: true, once: true });
             }
         };
 
