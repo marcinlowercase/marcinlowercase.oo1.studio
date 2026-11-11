@@ -5,7 +5,7 @@ let highestZ = 100;
 const defaultText = `i am Theo and marcinlowercase and the developer of <a href="https://oo1.studio" target="_blank" rel="noopener noreferrer">oo1 studio</a>`;
 
 const itemDescriptions = {
-    "item-logo": "this is the sign of marcinlowercase and Theo",
+    "item-logo": "the mark of marcinlowercase",
     "item-project-w": "built for coding and terminal on mobile",
     "item-project-a": "run web apps on mobile without hosting",
     "item-portrait": "Theo on November 9, 2026"
